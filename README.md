@@ -1,2 +1,1 @@
-# QR-Code-Generator-App
-# ui with tkinter
+# QR-Code-Generator-App-PY
