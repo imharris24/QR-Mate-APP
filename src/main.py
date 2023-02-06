@@ -18,7 +18,7 @@ customtkinter.set_default_color_theme('blue')
 
 # root
 root = customtkinter.CTk()
-root.geometry('600x600')
+root.geometry('600x497')
 root.title('QR Mate')
 root.resizable(False, False)
 root.iconphoto(False, ImageTk.PhotoImage(Image.open('favicon.png')))
@@ -45,13 +45,12 @@ entryTextQR.pack(pady=5, side=tkinter.LEFT)
 
 imageQR = None
 def generateQRCode():
-    text = entryTextQR.get()
-    global imageQR
-    imageQR = createQR(text)
+    global imageQR, buttonClearQR, buttonSaveQR
+    buttonSaveQR.configure(state=tkinter.NORMAL)
+    buttonClearQR.configure(state=tkinter.NORMAL)
+    imageQR = createQR(entryTextQR.get())
     imageQR.save('temp_img.png')
-    imageQR.save('new.png')
-    myQR = ImageTk.PhotoImage(Image.open('temp_img.png'))
-    labelImageQR.configure(image=myQR)
+    labelImageQR.configure(image=ImageTk.PhotoImage(Image.open('temp_img.png')))
     os.remove('temp_img.png')
 
 # generate buttom for QR
@@ -59,8 +58,7 @@ buttonGenerateQR = customtkinter.CTkButton(master=nestedFrame, text='Generate', 
 buttonGenerateQR.pack(side=tkinter.LEFT, pady=5)
 
 #labelImg = ImageTk.PhotoImage(image=imageQR)
-blankImage = ImageTk.PhotoImage(Image.open('blank.png'))
-labelImageQR = customtkinter.CTkLabel(master=frameGenerateQR, image=blankImage, text="")
+labelImageQR = customtkinter.CTkLabel(master=frameGenerateQR, image=ImageTk.PhotoImage(Image.open('blank.png')), text="")
 labelImageQR.pack(pady=10)
 
 # another nested frame for input buttons
@@ -68,21 +66,22 @@ nestedFrame2 = customtkinter.CTkFrame(master=frameGenerateQR, bg_color='#2b2b2b'
 nestedFrame2.pack(pady=5)
 
 def clearQR():
-    global labelImageQR
-    labelImageQR.configure(image=blankImage)
+    global labelImageQR, buttonSaveQR, buttonClearQR
+    buttonSaveQR.configure(state=tkinter.DISABLED)
+    buttonClearQR.configure(state=tkinter.DISABLED)
+    labelImageQR.configure(image=ImageTk.PhotoImage(Image.open('blank.png')))
 
 # clear button for setting QR to blank again
-buttonClearQR = customtkinter.CTkButton(master=nestedFrame2, text='Reset', width=1, command=clearQR)
+buttonClearQR = customtkinter.CTkButton(master=nestedFrame2, text='Reset', width=1, command=clearQR, state=tkinter.DISABLED)
 buttonClearQR.pack(side=tkinter.LEFT, pady=5)
 
 def saveQR():
-    fileDirectory = asksaveasfilename(initialfile = 'QR.png', defaultextension=".png", filetypes=[("All Files","*.*"),("Image Files","*.png")])
-    print(fileDirectory)
     global imageQR
-    imageQR.save(fileDirectory)
+    imageQR.save(asksaveasfilename(initialfile = 'QR.png', defaultextension=".png", filetypes=[("All Files","*.*"),("Image Files","*.png")])
+)
 
 # save button for saving image to PC
-buttonSaveQR = customtkinter.CTkButton(master=nestedFrame2, text='Save', width=1, command=saveQR)
+buttonSaveQR = customtkinter.CTkButton(master=nestedFrame2, text='Save', width=1, command=saveQR, state=tkinter.DISABLED)
 buttonSaveQR.pack(side=tkinter.LEFT, pady=5, padx=10)
 
 root.mainloop()
