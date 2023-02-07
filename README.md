@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/github/issues-pr-closed/imharris24/QR-Mate-APP?style=for-the-badge">
     <img src="https://img.shields.io/github/license/imharris24/QR-Mate-APP?style=for-the-badge">
     <img src="https://img.shields.io/github/forks/imharris24/QR-Mate-APP?style=for-the-badge">
-    <img src="https://img.shields.io/github/stars/imharris24QR-Mate-APP?style=for-the-badge">
+    <img src="https://img.shields.io/github/stars/imharris24/QR-Mate-APP?style=for-the-badge">
     <img src="https://img.shields.io/github/last-commit/imharris24/QR-Mate-APP?style=for-the-badge">
 </div>
 
